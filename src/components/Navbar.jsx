@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { HiMenuAlt3, HiX } from "react-icons/hi"; // Menggunakan ikon yang lebih stylish
+import { HiMenuAlt3, HiX } from "react-icons/hi";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -14,25 +14,37 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
-  const closeMenu = () => setIsOpen(false);
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+    // Mencegah scroll saat menu terbuka
+    if (!isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  };
+
+  const closeMenu = () => {
+    setIsOpen(false);
+    document.body.style.overflow = "unset";
+  };
 
   return (
     <nav
-      className={`navbar ${isScrolled ? "scrolled" : ""} ${isOpen ? "active" : ""}`}
+      className={`navbar ${isScrolled ? "scrolled" : ""} ${isOpen ? "menu-active" : ""}`}
     >
       <div className="container nav-content">
         <Link to="/" className="nav-logo-link" onClick={closeMenu}>
           <img src="/img/logo.png" alt="Logo" className="nav-logo" />
         </Link>
 
-        {/* HAMBURGER ICON */}
+        {/* Ikon Hamburger */}
         <div className="hamburger" onClick={toggleMenu}>
           {isOpen ? <HiX /> : <HiMenuAlt3 />}
         </div>
 
-        {/* NAV LINKS */}
-        <ul className={`nav-links ${isOpen ? "show-menu" : ""}`}>
+        {/* Overlay Menu Mobile */}
+        <ul className={`nav-links ${isOpen ? "show" : ""}`}>
           <li>
             <Link to="/" onClick={closeMenu}>
               Home
@@ -48,8 +60,10 @@ const Navbar = () => {
               About
             </Link>
           </li>
-          <li className="mobile-cta">
-            <button className="btn-gold-nav">HUBUNGI SAYA</button>
+          <li className="mobile-only">
+            <button className="btn-gold" onClick={closeMenu}>
+              HUBUNGI SAYA
+            </button>
           </li>
         </ul>
       </div>
