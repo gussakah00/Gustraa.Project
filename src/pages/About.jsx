@@ -4,7 +4,7 @@ import { FaBullseye, FaLightbulb } from "react-icons/fa";
 const About = () => {
   // Pastikan file-file ini ada di folder public/img/
   const teamMembers = [
-    { name: "Gus Sakah", role: "Management", photo: "tim1.jpeg" },
+    { name: "Gus Sakah", role: "Management", photo: "tim1.png" },
     { name: "Rahgents", role: "Tukang Pukul", photo: "tim2.png" },
     { name: "Arta", role: "Fotographer", photo: "tim3.jpg" },
     { name: "Putri Rahayu", role: "Photographer", photo: "tim4.jpg" },
