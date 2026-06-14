@@ -6,7 +6,7 @@ const About = () => {
   const teamMembers = [
     { name: "Gus Sakah", role: "Management", photo: "tim1.png" },
     { name: "Rahgents", role: "Tukang Pukul", photo: "tim2.png" },
-    { name: "Arta", role: "Fotographer", photo: "tim3.jpg" },
+    { name: "Arta", role: "Potographer", photo: "tim3.jpg" },
     { name: "Putri Rahayu", role: "Photographer", photo: "tim4.jpg" },
     { name: "Budi Artana", role: "Assistant", photo: "tim5.jpeg" },
     { name: "Dewi Sari", role: "Social Media", photo: "tim6.jpeg" },
