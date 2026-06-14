@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { HiMenu, HiX } from "react-icons/hi";
+import { HiMenuAlt3, HiX } from "react-icons/hi"; // Menggunakan ikon yang lebih stylish
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -8,41 +8,47 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Ubah state saat scroll lebih dari 50px
       setIsScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const toggleMenu = () => setIsOpen(!isOpen);
+  const closeMenu = () => setIsOpen(false);
+
   return (
-    <nav className={`navbar ${isScrolled ? "scrolled" : ""}`}>
+    <nav
+      className={`navbar ${isScrolled ? "scrolled" : ""} ${isOpen ? "active" : ""}`}
+    >
       <div className="container nav-content">
-        <Link to="/" className="nav-logo-link">
-          <img
-            src="/img/logo.png"
-            alt="Gusstraa Project"
-            className="nav-logo"
-          />
+        <Link to="/" className="nav-logo-link" onClick={closeMenu}>
+          <img src="/img/logo.png" alt="Logo" className="nav-logo" />
         </Link>
 
-        {/* Ikon Hamburger (Hanya muncul di Mobile) */}
-        <div className="hamburger" onClick={() => setIsOpen(!isOpen)}>
-          {isOpen ? <HiX /> : <HiMenu />}
+        {/* HAMBURGER ICON */}
+        <div className="hamburger" onClick={toggleMenu}>
+          {isOpen ? <HiX /> : <HiMenuAlt3 />}
         </div>
 
-        {/* Nav Links tetap sejajar horizontal */}
-        <ul className="nav-links">
+        {/* NAV LINKS */}
+        <ul className={`nav-links ${isOpen ? "show-menu" : ""}`}>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" onClick={closeMenu}>
+              Home
+            </Link>
           </li>
           <li>
-            <Link to="/pricelist">Pricelist</Link>
+            <Link to="/pricelist" onClick={closeMenu}>
+              Pricelist
+            </Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <Link to="/about" onClick={closeMenu}>
+              About
+            </Link>
           </li>
-          <li>
+          <li className="mobile-cta">
             <button className="btn-gold-nav">HUBUNGI SAYA</button>
           </li>
         </ul>

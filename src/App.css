@@ -212,6 +212,7 @@ a {
   align-items: center;
   gap: 60px;
   margin-bottom: 100px;
+  flex-direction: row; /* Default: Foto Kiri, Teks Kanan */
 }
 
 .ceo-row.reverse {
@@ -220,7 +221,6 @@ a {
 
 .ceo-photo-wrapper {
   flex: 1;
-  position: relative;
   text-align: center;
 }
 
@@ -825,36 +825,40 @@ a {
 
 @media (max-width: 768px) {
   .hamburger {
-    display: block; /* Muncul di Mobile */
+    display: block !important; /* Paksa muncul di mobile */
+  }
+
+  /* Jika menu dibuka, hamburger harus hitam agar terlihat di bg putih menu */
+  .navbar.active .hamburger {
+    color: #1a1a1a !important;
   }
 
   .nav-links {
     position: fixed;
     top: 0;
-    right: -100%; /* Sembunyi di kanan luar layar */
-    width: 80%; /* Lebar menu mobile */
+    right: -100%; /* Sembunyi di kanan */
+    width: 75%; /* Lebar menu mobile */
     height: 100vh;
-    background-color: #ffffff;
-    flex-direction: column; /* Menu tumpuk vertikal */
+    background: #ffffff;
+    flex-direction: column;
     justify-content: center;
-    gap: 40px;
-    transition: 0.5s ease-in-out;
-    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
-    z-index: 1500;
+    align-items: center;
+    gap: 35px;
+    transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+    box-shadow: -10px 0 20px rgba(0, 0, 0, 0.1);
   }
 
-  /* Saat menu aktif (Slide ke kiri) */
-  .nav-links.active {
-    right: 0;
+  .nav-links.show-menu {
+    right: 0; /* Slide ke kiri (muncul) */
   }
 
-  .nav-links li a {
-    color: #1a1a1a !important; /* Paksa hitam di mobile menu */
+  .nav-links a {
+    color: #1a1a1a !important; /* Paksa teks hitam di menu putih */
     font-size: 1.2rem;
-    text-shadow: none !important;
+    font-weight: 700;
   }
 
-  .nav-cta {
+  .mobile-cta {
     width: 80%;
   }
 
@@ -864,15 +868,15 @@ a {
     font-size: 1rem;
   }
 
-  /* Overlay gelap saat menu terbuka (opsional) */
-  .navbar.menu-open::before {
+  /* Blur/Overlay Background saat menu terbuka */
+  .navbar.active::before {
     content: "";
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 1400;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1; /* Di belakang menu, di depan konten */
   }
 }
