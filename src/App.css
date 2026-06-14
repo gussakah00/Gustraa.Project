@@ -114,17 +114,22 @@ a {
 }
 
 /* ==========================================================================
-   3. HEADER & NAVBAR
+   HEADER & NAVBAR (CLEAN VERSION)
    ========================================================================== */
-/* --- NAVBAR BASE (SAAT DI ATAS BANNER) --- */
 .navbar {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 9999; /* Pastikan di paling depan */
   padding: 20px 0;
-  background: transparent; /* Bening total di awal */
-  transition: all 0.4s ease; /* Transisi halus */
+  background: transparent;
+  transition: all 0.4s ease;
+}
+
+.navbar.scrolled {
+  background: #ffffff;
+  padding: 10px 0;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
 }
 
 .nav-content {
@@ -133,72 +138,98 @@ a {
   align-items: center;
 }
 
+.nav-logo {
+  height: 50px;
+  display: block;
+}
+
+/* --- NAV LINKS (DESKTOP) --- */
 .nav-links {
-  display: flex; /* KUNCI: Tetap sejajar horizontal */
+  display: flex;
   align-items: center;
   gap: 30px;
-  list-style: none; /* Hilangkan titik hitam */
-  margin: 0;
-  padding: 0;
 }
 
 .nav-links a {
   font-weight: 700;
   text-transform: uppercase;
   font-size: 0.9rem;
-  color: #ffffff; /* Teks putih agar terlihat jelas di atas foto banner */
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Bayangan agar teks terbaca di area terang */
+  color: #ffffff; /* Putih saat di banner */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* Logo di navbar */
-.nav-logo {
-  height: 50px;
-  display: block;
-}
-
-/* Tombol khusus di navbar */
-.btn-gold-nav {
-  background-color: var(--primary-gold);
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  font-weight: 700;
-  text-transform: uppercase;
-  cursor: pointer;
-  font-size: 0.8rem;
-}
-
-/* --- NAVBAR SAAT DI-SCROLL (PUTIH MUNCUL) --- */
-.navbar.scrolled {
-  background: #ffffff; /* Muncul putihnya */
-  padding: 10px 0; /* Navbar mengecil sedikit */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Warna teks berubah jadi hitam saat background navbar putih */
 .navbar.scrolled .nav-links a {
   color: #1a1a1a;
   text-shadow: none;
 }
 
-.navbar.scrolled .nav-links a:hover {
-  color: var(--primary-gold);
+.nav-links a:hover {
+  color: var(--primary-gold) !important;
 }
 
-/* --- RESPONSIVE FIX --- */
+/* --- HAMBURGER ICON --- */
+.hamburger {
+  display: none; /* Sembunyi di desktop */
+  cursor: pointer;
+  font-size: 2.2rem;
+  z-index: 10001; /* Di atas segalanya */
+  color: #ffffff;
+}
+
+.navbar.scrolled .hamburger {
+  color: #1a1a1a;
+}
+
+/* ==========================================================================
+   MOBILE NAVIGATION (MAX-WIDTH: 768px)
+   ========================================================================== */
 @media (max-width: 768px) {
+  .hamburger {
+    display: block !important;
+  }
+
+  /* Jika menu terbuka, ikon harus hitam agar terlihat di bg putih menu */
+  .navbar.active .hamburger {
+    color: #1a1a1a !important;
+  }
+
   .nav-links {
-    gap: 15px;
+    position: fixed;
+    top: 0;
+    right: -100%; /* Sembunyi di kanan */
+    width: 75%;
+    height: 100vh;
+    background: #ffffff;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 35px;
+    transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
   }
+
+  /* Class untuk memunculkan menu */
+  .nav-links.active {
+    right: 0;
+  }
+
   .nav-links a {
-    font-size: 0.75rem;
+    color: #1a1a1a !important;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-shadow: none !important;
   }
-  .nav-logo {
-    height: 35px;
-  }
-  .btn-gold-nav {
-    padding: 8px 12px;
-    font-size: 0.7rem;
+
+  /* Overlay gelap saat menu buka */
+  .navbar.active::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
   }
 }
 
@@ -805,78 +836,5 @@ a {
 @media (max-width: 768px) {
   .team-grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-}
-/* --- HAMBURGER MENU STYLES --- */
-.hamburger {
-  display: none; /* Sembunyi di Desktop */
-  font-size: 2rem;
-  cursor: pointer;
-  z-index: 2000;
-  color: #ffffff; /* Warna awal saat di banner */
-  transition: color 0.3s ease;
-}
-
-/* Warna hamburger berubah jadi hitam saat di-scroll atau saat menu terbuka */
-.navbar.scrolled .hamburger,
-.navbar.menu-open .hamburger {
-  color: #1a1a1a;
-}
-
-@media (max-width: 768px) {
-  .hamburger {
-    display: block !important; /* Paksa muncul di mobile */
-  }
-
-  /* Jika menu dibuka, hamburger harus hitam agar terlihat di bg putih menu */
-  .navbar.active .hamburger {
-    color: #1a1a1a !important;
-  }
-
-  .nav-links {
-    position: fixed;
-    top: 0;
-    right: -100%; /* Sembunyi di kanan */
-    width: 75%; /* Lebar menu mobile */
-    height: 100vh;
-    background: #ffffff;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 35px;
-    transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
-    box-shadow: -10px 0 20px rgba(0, 0, 0, 0.1);
-  }
-
-  .nav-links.show-menu {
-    right: 0; /* Slide ke kiri (muncul) */
-  }
-
-  .nav-links a {
-    color: #1a1a1a !important; /* Paksa teks hitam di menu putih */
-    font-size: 1.2rem;
-    font-weight: 700;
-  }
-
-  .mobile-cta {
-    width: 80%;
-  }
-
-  .btn-gold-nav {
-    width: 100%;
-    padding: 15px;
-    font-size: 1rem;
-  }
-
-  /* Blur/Overlay Background saat menu terbuka */
-  .navbar.active::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: -1; /* Di belakang menu, di depan konten */
   }
 }
