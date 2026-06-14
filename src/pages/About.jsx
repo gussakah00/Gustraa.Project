@@ -32,7 +32,6 @@ const About = () => {
       {/* Vision & Mission Cards */}
       <div className="about-vision-mission">
         <div className="gold-big-card">
-          <div className="icon-placeholder"></div>
           <h3>Visi Kami</h3>
           <p>
             Menjadi partner dokumentasi utama yang dikenal karena kualitas hasil
@@ -41,7 +40,6 @@ const About = () => {
         </div>
 
         <div className="gold-big-card">
-          <div className="icon-placeholder"></div>
           <h3>Misi Kami</h3>
           <p>
             Memberikan hasil karya dokumentasi yang jujur, estetik, dan mampu
