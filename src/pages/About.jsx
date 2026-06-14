@@ -28,6 +28,68 @@ const About = () => {
           dengan cara yang paling elegan dan abadi.
         </p>
       </div>
+      {/* 2. Letter of CEO Section (TAMBAHAN BARU) */}
+      <section className="ceo-letter-section">
+        {/* CEO 1: Foto Kiri, Tulisan Kanan */}
+        <div className="ceo-row">
+          <div className="ceo-photo-wrapper fade-right">
+            <img
+              src="/img/tim9.jpeg"
+              alt="CEO 1"
+              onError={(e) =>
+                (e.target.src = "https://via.placeholder.com/400x500")
+              }
+            />
+            <div className="ceo-label">
+              <h4>I Gusti Ngurah Rai</h4>
+              <p>CEO of Gusstraa.Project</p>
+            </div>
+          </div>
+          <div className="ceo-content">
+            <h3>Letter from CEO</h3>
+            <p>
+              "Setiap jepretan kamera bukan sekadar menangkap gambar, melainkan
+              mengunci emosi yang ada di dalamnya. Di Gusstraa.Project, kami
+              berkomitmen untuk memberikan hasil yang melebihi ekspektasi klien
+              kami."
+            </p>
+            <p>
+              Perjalanan kami dimulai dari semangat untuk mendokumentasikan
+              keindahan budaya dan momen personal dengan pendekatan yang lebih
+              artistik dan premium.
+            </p>
+          </div>
+        </div>
+
+        {/* CEO 2: Tulisan Kiri, Foto Kanan */}
+        <div className="ceo-row reverse">
+          <div className="ceo-content">
+            <h3>Leading with Passion</h3>
+            <p>
+              "Kami percaya bahwa dokumentasi adalah investasi masa depan.
+              Ketika waktu berlalu, foto dan video adalah mesin waktu yang
+              membawa kita kembali ke momen paling bahagia dalam hidup."
+            </p>
+            <p>
+              Visi kami adalah memastikan setiap klien merasa dihargai dan
+              mendapatkan karya seni yang bisa mereka banggakan selamanya.
+            </p>
+          </div>
+          <div className="ceo-photo-wrapper fade-left">
+            <img
+              src="/img/tim10.jpeg"
+              alt="CEO 2"
+              onError={(e) =>
+                (e.target.src = "https://via.placeholder.com/400x500")
+              }
+            />
+            <div className="ceo-label">
+              <h4>Sastra Dinata</h4>
+              <p>CEO of Gusstraa.Project</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Vision & Mission Cards */}
       <div className="about-vision-mission">

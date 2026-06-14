@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { HiMenu, HiX } from "react-icons/hi";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,6 +25,11 @@ const Navbar = () => {
             className="nav-logo"
           />
         </Link>
+
+        {/* Ikon Hamburger (Hanya muncul di Mobile) */}
+        <div className="hamburger" onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <HiX /> : <HiMenu />}
+        </div>
 
         {/* Nav Links tetap sejajar horizontal */}
         <ul className="nav-links">

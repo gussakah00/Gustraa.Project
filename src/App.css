@@ -202,6 +202,117 @@ a {
   }
 }
 
+/* --- CEO LETTER SECTION --- */
+.ceo-letter-section {
+  margin-bottom: 80px;
+}
+
+.ceo-row {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  margin-bottom: 100px;
+}
+
+.ceo-row.reverse {
+  flex-direction: row-reverse;
+}
+
+.ceo-photo-wrapper {
+  flex: 1;
+  position: relative;
+  text-align: center;
+}
+
+.ceo-photo-wrapper img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+}
+
+/* Efek Fade pada Gambar */
+.ceo-photo-wrapper.fade-right img {
+  mask-image: linear-gradient(to right, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
+}
+
+.ceo-photo-wrapper.fade-left img {
+  mask-image: linear-gradient(to left, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to left, black 80%, transparent 100%);
+}
+
+/* Label Nama di bawah Foto */
+.ceo-label {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.ceo-label h4 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.2rem;
+  color: var(--primary-gold);
+  margin-bottom: 5px;
+}
+
+.ceo-label p {
+  font-size: 0.85rem;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Teks Letter */
+.ceo-content {
+  flex: 1.2;
+}
+
+.ceo-content h3 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  position: relative;
+  display: inline-block;
+}
+
+.ceo-content h3::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 50px;
+  height: 3px;
+  background-color: var(--primary-gold);
+}
+
+.ceo-content p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #444;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+/* Responsive Tablet/HP */
+@media (max-width: 768px) {
+  .ceo-row,
+  .ceo-row.reverse {
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+  }
+
+  .ceo-content h3::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .ceo-photo-wrapper img {
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+  }
+}
+
 /* ==========================================================================
    4. HOME PAGE SECTIONS
    ========================================================================== */
@@ -694,5 +805,74 @@ a {
 @media (max-width: 768px) {
   .team-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+/* --- HAMBURGER MENU STYLES --- */
+.hamburger {
+  display: none; /* Sembunyi di Desktop */
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 2000;
+  color: #ffffff; /* Warna awal saat di banner */
+  transition: color 0.3s ease;
+}
+
+/* Warna hamburger berubah jadi hitam saat di-scroll atau saat menu terbuka */
+.navbar.scrolled .hamburger,
+.navbar.menu-open .hamburger {
+  color: #1a1a1a;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: block; /* Muncul di Mobile */
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Sembunyi di kanan luar layar */
+    width: 80%; /* Lebar menu mobile */
+    height: 100vh;
+    background-color: #ffffff;
+    flex-direction: column; /* Menu tumpuk vertikal */
+    justify-content: center;
+    gap: 40px;
+    transition: 0.5s ease-in-out;
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+    z-index: 1500;
+  }
+
+  /* Saat menu aktif (Slide ke kiri) */
+  .nav-links.active {
+    right: 0;
+  }
+
+  .nav-links li a {
+    color: #1a1a1a !important; /* Paksa hitam di mobile menu */
+    font-size: 1.2rem;
+    text-shadow: none !important;
+  }
+
+  .nav-cta {
+    width: 80%;
+  }
+
+  .btn-gold-nav {
+    width: 100%;
+    padding: 15px;
+    font-size: 1rem;
+  }
+
+  /* Overlay gelap saat menu terbuka (opsional) */
+  .navbar.menu-open::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1400;
   }
 }
